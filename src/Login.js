@@ -7,8 +7,8 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
-    const correctUsername = "Ntare";
-    const correctPassword = "Alpha123!!!";
+    const correctUsername = "sma-admin";
+    const correctPassword = "Omegle2050";
 
     const navigate = useNavigate()
 

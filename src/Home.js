@@ -13,12 +13,10 @@ export default function Home() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Whenever the students array changes, update localStorage
         localStorage.setItem("students", JSON.stringify(students));
     }, [students]);
 
     const handleRowClick = (e, student, index) => {
-        // Check if the event is triggered by checkbox
         if (e.target.type !== 'checkbox') {
             setSelectedStudent({ ...student, index });
             setIsOpen(true);
@@ -27,7 +25,7 @@ export default function Home() {
 
 
     const handleRowSelection = (e, index) => {
-        e.stopPropagation();  // Prevent triggering of handleRowClick function
+        e.stopPropagation();
 
         if (e.target.checked) {
             setSelectedRows((prev) => [...prev, index]);
