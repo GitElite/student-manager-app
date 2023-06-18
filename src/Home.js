@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom"
 import Modal from './Modal';
+import StudentReport from './StudentReport';
 
 export default function Home() {
     const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +24,6 @@ export default function Home() {
         }
     };
 
-
     const handleRowSelection = (e, index) => {
         e.stopPropagation();
 
@@ -33,8 +33,6 @@ export default function Home() {
             setSelectedRows((prev) => prev.filter((i) => i !== index));
         }
     };
-
-
 
     const handleAddClick = () => {
         setSelectedStudent(null);
@@ -59,17 +57,27 @@ export default function Home() {
                 grade: student.grade,
                 favoriteSubject: student.favoriteSubject,
                 sportsColor: student.sportsColor,
+                englishScore: student.englishScore,
+                socialStudiesScore: student.socialStudiesScore,
+                scienceScore: student.scienceScore,
+                mathScore: student.mathScore
             };
             setStudents(updatedStudents);
         } else {
             setStudents([
                 ...students,
-                { name: student.name, age: student.age, grade: student.grade, favoriteSubject: student.favoriteSubject, sportsColor: student.sportsColor },
+                { name: student.name, age: student.age, grade: student.grade, favoriteSubject: student.favoriteSubject, sportsColor: student.sportsColor, englishScore: student.englishScore, socialStudiesScore: student.socialStudiesScore, scienceScore: student.scienceScore, mathScore: student.mathScore },
             ]);
         }
 
         setIsOpen(false);
         setSelectedStudent(null);
+    };
+
+    const handleViewClick = ( e, index ) => {
+        e.stopPropagation();
+        setSelectedStudent(students[index]);
+        navigate("/student-report");
     };
 
     return (
@@ -114,6 +122,7 @@ export default function Home() {
                         <th className="px-4 py-2 text-center">Grade</th>
                         <th className="px-4 py-2 text-center">Favorite Subject</th>
                         <th className="px-4 py-2 text-center">Sports Color</th>
+                        <th className="px-4 py-2 text-center">Report Card</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -139,10 +148,22 @@ export default function Home() {
                             <td className="px-4 py-2 text-center align-middle">{student.grade}</td>
                             <td className="px-4 py-2 text-center align-middle">{student.favoriteSubject}</td>
                             <td className="px-4 py-2 text-center align-middle">{student.sportsColor}</td>
+                            <td className="text-center align-middle">
+                                <button
+                                    onClick={(e) => {
+                                        handleViewClick(e, index);
+                                        console.log("I've been clicked!");
+                                    }}
+                                    className="px-4 py-2 m-2 bg-blue-500 hover:bg-blue-400 active:bg-blue-600 active:text-sm text-white rounded"    
+                                >
+                                    View
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            {selectedStudent && <StudentReport student={selectedStudent} />}
         </>
     );
 }

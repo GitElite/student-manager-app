@@ -6,10 +6,15 @@ function Modal({ student, isOpen, setIsOpen, addOrEditStudent }) {
   const [grade, setGrade] = useState(student?.grade || '');
   const [favoriteSubject, setFavoriteSubject] = useState(student?.favoriteSubject || '');
   const [sportsColor, setSportsColor] = useState(student?.sportsColor || '');
+  const [englishScore, setEnglishScore] = useState(student?.englishScore.toString() || '');
+  const [socialStudiesScore, setSocialStudiesScore] = useState(student?.socialStudiesScore.toString() || '');
+  const [scienceScore, setScienceScore] = useState(student?.scienceScore.toString() || '');
+  const [mathScore, setMathScore] = useState(student?.mathScore.toString() || '');
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addOrEditStudent({ index: student?.index, name, age: Number(age), grade, favoriteSubject, sportsColor });
+    addOrEditStudent({ index: student?.index, name, age: Number(age), grade, favoriteSubject, sportsColor, englishScore: Number(englishScore), socialStudiesScore: Number(socialStudiesScore), scienceScore: Number(scienceScore), mathScore: Number(mathScore) });
   };
 
   useEffect(() => {
@@ -19,6 +24,11 @@ function Modal({ student, isOpen, setIsOpen, addOrEditStudent }) {
       setGrade('');
       setFavoriteSubject('');
       setSportsColor('');
+      setEnglishScore('');
+      setSocialStudiesScore('');
+      setScienceScore('');
+      setMathScore('');
+
     }
   }, [isOpen])
 
@@ -114,7 +124,7 @@ function Modal({ student, isOpen, setIsOpen, addOrEditStudent }) {
                         <option value="">Select a Subject</option>
                         <option value="Math">Math</option>
                         <option value="Science">Science</option>
-                        <option value="History">Social Studies</option>
+                        <option value="Social Studies">Social Studies</option>
                         <option value="English">English</option>
                       </select>
                     </div>
@@ -137,6 +147,66 @@ function Modal({ student, isOpen, setIsOpen, addOrEditStudent }) {
                         <option value="Green">Green</option>
                         <option value="Red">Red</option>
                       </select>
+                    </div>
+
+                    <div className="mb-4">
+                      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="age">
+                        English Score
+                      </label>
+
+                      <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="englishScore"
+                        type="number"
+                        value={englishScore}
+                        onChange={(e) => setEnglishScore(e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    <div className="mb-4">
+                      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="age">
+                        Social Studies Score
+                      </label>
+
+                      <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="socialStudiesScore"
+                        type="number"
+                        value={socialStudiesScore}
+                        onChange={(e) => setSocialStudiesScore(e.target.value)}
+                        required
+                      />                    
+                    </div>
+
+                    <div className="mb-4">
+                      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="age">
+                        Science Score
+                      </label>
+
+                      <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="scienceScore"
+                        type="number"
+                        value={scienceScore}
+                        onChange={(e) => setScienceScore(e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    <div className="mb-4">
+                      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="age">
+                        Math Score
+                      </label>
+
+                      <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="mathScore"
+                        type="number"
+                        value={mathScore}
+                        onChange={(e) => setMathScore(e.target.value)}
+                        required
+                      />
                     </div>
 
                     <div className="flex items-center justify-between">
